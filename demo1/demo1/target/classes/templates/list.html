@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" xmlns:th="http://www.thymeleaf.org">
+<title>list</title>
+</head>
+<body>
+<table>
+	<tr>
+		<th>id</th>
+		<th>title</th>
+		<th>writer</th>
+		<th>contents</th>
+		<th>date</th>
+		<th>hits</th>
+	</tr>
+	
+	<!-- th:each는 (반복 대상) // foreach랑 같은 형태 // board: ${boardList}는 변수 개념임-->
+	<!-- board라는 변수로 이제 하나씩 접근하게 되는 것임 -->
+	<tr th:each="board: ${boardList}">
+		<td th:text="${board.id}"></td>
+		<td><a th:href="@{|/board/${board.id}|}" th:text="${board.title}"></a></td>
+		<td th:text="${board.writer}"></td>
+		<td th:text="*{#temporals.format(board.writeTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+		<td th:text="${board.hits}"></td>
+	</tr>
+	
+</table>
+</body>
+</html>

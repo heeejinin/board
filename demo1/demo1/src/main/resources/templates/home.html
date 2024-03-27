@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Home</title>
+</head>
+<body>
+<button onclick="saveReq()">글작성</button> <!-- onclick은 함수를 불러냄 -->
+<button onclick="listReq()">글목록</button>
+</body>
+
+<script>
+	const saveReq = () =>{
+		location.href = "/board/write";
+	}
+
+	const listReq = () =>{
+		location.href = "/board/list";
+	}
+
+</script>
+</html>

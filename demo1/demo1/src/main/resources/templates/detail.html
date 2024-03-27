@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" xmlns:th="http://www.thymeleaf.org">
+<title>detail</title>
+
+<!-- 댓글 ajax 사용을 위해 jquery 라이브러리를 cdn 주소로 입력 -->
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+
+</head>
+<body>
+<table>
+	<tr>
+		<th>아이디</th>
+		<td th:text="${board.id}"></td>
+	</tr>
+	<tr>
+		<th>제목</th>
+		<td th:text="${board.title}"></td>
+	</tr>
+		<tr>
+		<th>작성자</th>
+		<td th:text="${board.writer}"></td>
+	</tr>
+		<tr>
+		<th>날짜</th>
+		<td th:text="${board.writeTime}"></td>
+	</tr>
+	</tr>
+		<tr>
+		<th>조회수</th>
+		<td th:text="${board.hits}"></td>
+	</tr>
+		</tr>
+		<tr>
+		<th>내용</th>
+		<td th:text="${board.contents}"></td>
+	</tr>	
+</table>
+<button onclick="listReq()">목록</button>
+<button onclick="updateReq()">수정</button>
+<button onclick="deleteReq()">삭제</button>
+
+<!-- 댓글 작성 부분 // input 값을 바로 폼으로 전달하는 것이 아니기 때문에 폼 태그로 묶어줄 필요x // 입력 값을 스크립트로 가져올 수만 있으면 됨-->
+<div id="comment-write">
+	<input type="text" id="commentWriter" placeholder="작성자">
+	<input type="text" id="commentContents" placeholder="내용">
+	<button id="comment-write-btn" onclick="commentWrite()">댓글작성</button>
+</div>
+
+<!-- 댓글 출력 부분 -->
+<div id="comment-list">
+	<table>
+		<tr>
+			<th>댓글번호</th>
+			<th>작성자</th>
+			<th>내용</th>
+			<th>작성시간</th>
+		</tr>
+		<tr th:each="comment: ${commentList}">
+			<td th:text="${comment.id}"></td>
+			<td th:text="${comment.commentWriter}"></td>
+			<td th:text="${comment.commentContents}"></td>
+			<td th:text="${comment.commentWriteTime}"></td>
+		</tr>
+	</table>
+</div>
+
+
+
+
+</body>
+<script th:inline="javascript">
+	const commentWrite = () => { /* 자바스크립트 돔 api를 사용해서 값 2개를 가져와야 함 */
+		const writer = document.getElementById("commentWriter").value; /* input 태그이기 때문에 .value 속성 접근이 가능함//일반 태그는 이런 value 속성이 따로 없음 */
+		const contents = document.getElementById("commentContents").value;
+		console.log("작성자: ", writer);
+		console.log("내용: ", contents);
+		const id = /*[[${board.id}]]*/ ''; //게시글 번호 // 타임리프에서 모델에 담긴 값에 접근할 때 사용하는 방법 => th:inline="javascript" 이 부분이 언급 되어 있어야 함
+		
+		$.ajax({
+			//요청방식: post, 요청주소: /comment/save, 요청데이터: 작성자, 작성내용, 게시글번호(어떤 글에 적힌 댓글인지를 알아야 함)
+			type: "post",
+			url: "/comment/write",
+			data: { 
+				"commentWriter": writer,
+				"commentContents": contents,
+				"boardId": id
+			},
+			success: function (res) {
+	               console.log("요청성공", res);
+	               /* let output = "<table>";
+	               output += "<tr><th>댓글번호</th>";
+	               output += "<th>작성자</th>";
+	               output += "<th>내용</th>";
+	               output += "<th>작성시간</th></tr>";
+	               for (let i in res) {
+	                   output += "<tr>";
+	                   output += "<td>" + res[i].id + "</td>";
+	                   output += "<td>" + res[i].commentWriter + "</td>";
+	                   output += "<td>" + res[i].commentContents + "</td>";
+	                   output += "<td>" + res[i].commentCreatedTime + "</td>";
+	                   output += "</tr>";
+	               }
+	               output += "</table>";
+	               document.getElementById('comment-list').innerHTML = output;
+	               document.getElementById('commentWriter').value = '';
+	               document.getElementById('commentContents').value = ''; */
+	           },
+	           error: function (err) {
+	               console.log("요청실패", err);
+	           }
+		});
+	}
+
+
+
+	const listReq = () => {
+		console.log("상세조회 목록");
+		location.href = "/board/list";
+	}
+	
+	const updateReq = () => {
+		console.log("수정 요청");
+		const id = /*[[${board.id}]]*/ ''; //모델에 담아 온 데이터를 자바스크립트에서 변수로 활용하는 경우에는 th:inline="javascript" 내용 필요
+		location.href = "/board/update/"+ id;
+	}
+	
+	const deleteReq = () => {
+		console.log("삭제 요청");
+		const id = /*[[${board.id}]]*/ '';
+		location.href = "/board/delete/" + id;
+	}
+</script>
+</html>
