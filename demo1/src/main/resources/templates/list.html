@@ -25,6 +25,13 @@
 		<td th:text="${board.hits}"></td>
 	</tr>
 	
+	<button onclick="HomeReq()">홈으로</button>
+	
 </table>
 </body>
+<script>
+	const HomeReq = () => {
+		location.href="/";
+	}
+</script>
 </html>

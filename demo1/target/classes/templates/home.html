@@ -5,12 +5,12 @@
 <title>Home</title>
 </head>
 <body>
-<button onclick="saveReq()">글작성</button> <!-- onclick은 함수를 불러냄 -->
+<button onclick="writeReq()">글작성</button> <!-- onclick은 함수를 불러냄 => 함수에서 href 속성 => href는 get -->
 <button onclick="listReq()">글목록</button>
 </body>
 
 <script>
-	const saveReq = () =>{
+	const writeReq = () =>{
 		location.href = "/board/write";
 	}
 

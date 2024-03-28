@@ -44,12 +44,12 @@ public class BoardService {
 	@Transactional //JPA에서 제공하는 메서드가 아닌 별도로 추가한 메서드를 사용하는 경우에는 @Transactional 사용해야 함
 	public void updateHits(Long id) {
 		boardRepository.updateHits(id);
-		
+		//void는 반환값X
 	}
 
 	public BoardDTO findById(Long id) {
 		Optional<BoardEntity> optionalBoardEntity = boardRepository.findById(id);
-		//Optional은 값의 존재 여부를 나타내는 컨테이너 객체 
+		//Optional은 값의 존재 여부를 나타내는 컨테이너 객체
 		//만약 해당 ID에 해당하는 게시글이 없으면 빈 Optional 객체가 반환
 		if(optionalBoardEntity.isPresent()) { //optionalBoardEntity 옵셔널 객체가 있으면 boardDTO로 반환하고, 
 			BoardEntity boardEntity = optionalBoardEntity.get(); //optionalBoardEntity 객체에서 실제 BoardEntity 객체를 가져옵니다. 이 작업은 get() 메서드를 사용하여 수행

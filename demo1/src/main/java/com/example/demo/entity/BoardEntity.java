@@ -21,7 +21,7 @@ import lombok.Setter;
 public class BoardEntity extends DateEntity{ //날짜entity를 상속 받음 (날짜를 갖게 됨)
 	@Id //pk컬럼 지정, 필수
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 	
 	@Column(length = 20, nullable = false) //옵션: 크기 20, not null
 	private String writer;
