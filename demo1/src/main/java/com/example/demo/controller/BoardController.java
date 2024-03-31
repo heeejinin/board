@@ -28,15 +28,15 @@ public class BoardController {
 	private final CommentService commentService;
 	
 	//작성 폼 가져오기 (href는 get 속성)
-	@GetMapping("write")
-	public String writeform() {
-		return "write"; //write.html로 감
+	@GetMapping("write") 
+	public String writeform() { 
+		return "write"; //write.html로 감 
 	}
 	
 	//글 작성하고 홈으로 돌아가기
 	@PostMapping("write")
 	public String write(@ModelAttribute BoardDTO boardDTO) {//폼에 있는 데이터를 write 매개변수(BoardDTO)에 담음
-		System.out.println("boardDTO = " + boardDTO.getContents()+", "+boardDTO.getTitle()+","+boardDTO.getId());
+//		System.out.println("boardDTO = " + boardDTO.getContents()+", "+boardDTO.getTitle()+","+boardDTO.getId());
 		boardService.write(boardDTO); 
 		return "home"; //home.html로 감
 	}
@@ -101,7 +101,6 @@ public class BoardController {
 	
  
 }
-
 
 
 

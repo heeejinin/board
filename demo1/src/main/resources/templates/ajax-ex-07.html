@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ex07</title>
+<!-- jQuery CDN -->
+  <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <button onclick="ex07Fn()">ex07 함수 호출</button>
+</body>
+<script>
+  const ex07Fn = () => {
+    const val1 = "Hello SpringBoot!!";
+
+    const params = {
+        "param1": val1,
+        "param2": "안녕"
+    };
+	
+    //requestbody를 ajax로 보내는 방법은 기존에 보냈던 파라미터 requestParam방식과는 차이가 좀 있음
+    $.ajax({
+      // 요청방식: post
+      // 요청주소: /ex07
+      type: "post",
+      url: "/ex07",
+      // parameter 전달하기
+      //하기의 설정들도 http요청과 관련된 내용들임
+      //기존에 보내는 방식과 현재 보내고자 하는 방식은 컨텐트 타입의 차이가 좀 있음 // json 형태로 컨트롤러에 데이터를 요청을 보냄 //기존에 보내던건 자바스크립트 오브젝트를 객체로 보내는 방식이었음 => 이것을 제이슨으로 변환해서 이제 보내는 것임 // 콘텐트 타입도 서버쪽에다가 요청 메세지를 보낼 때, 이 파라미터는 제이슨으로 보낸다 이런 것들에 대한 명시가 좀 필요한 것임 그래야 컨트롤러 입장에서 리퀘스트바디를 제대로 사용할 수 있게 됨 
+      data: JSON.stringify(params),
+      contentType: "application/json",
+      // 요청이 성공했을 때 실행되는 부분
+      success: function(res) {
+        console.log("성공", res);
+        console.log("param1", res.param1); //param1값만 보고 싶을 때
+      },
+      // 요청이 실패했을 때 실행되는 부분
+      error: function() {
+        console.log("실패");
+      }
+    })
+  }
+
+</script>
+</html>

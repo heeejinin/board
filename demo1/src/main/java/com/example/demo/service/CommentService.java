@@ -29,10 +29,10 @@ public class CommentService {
 		// 부모엔티티(BoardEntity) 조회
 		Optional<BoardEntity> optionalBoardEntity = boardRepository.findById(commentDTO.getBoardId());
 		if (optionalBoardEntity.isPresent()) {
-	        BoardEntity boardEntity = optionalBoardEntity.get(); //.get()메서드로 Optional 객체에서 실제 BoardEntity 객체를 가져옴
+	        BoardEntity boardEntity = optionalBoardEntity.get(); //.get()메서드로 Optional 객체에서 실제 BoardEntity 객체를 가져옴 =>즉, 댓글을 작성할 게시글을 지정하기 위해 게시글 엔티티가 필요
 	      //DTO로 받아온 것을 Entity로 변환하는 작업 필요
 	        CommentEntity commentEntity = CommentEntity.toSaveEntity(commentDTO, boardEntity); //boardEntity는 게시글 id 때문에 필요
-	        return commentRepository.save(commentEntity).getId();
+	        return commentRepository.save(commentEntity).getId(); //댓글 엔티티를 저장하고, 이를 통해 저장된 댓글 엔티티의 ID를 가져옴 // id를 리턴해야해서 반환타입이 Long이 됨
 	    } else {
 	        return null;
 	    }

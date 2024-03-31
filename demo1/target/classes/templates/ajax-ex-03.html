@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ex03</title>
+<!-- jQuery CDN -->
+  <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <button onclick="ex03Fn()">ex03 함수 호출</button>
+</body>
+<script>
+  const ex03Fn = () => {
+    const val1 = "Hello SpringBoot!!"; //스크립트 함수 변수 선언
+
+    $.ajax({
+      // 요청방식: get
+      // 요청주소: /ex03
+      type: "get",
+      url: "/ex03",
+      // parameter 전달하기
+      data: { //data는 자바스크립트 오브젝트처럼 사용하면 됨
+            "param1": val1, // 키값: value값 형태로 데이터를 보냄/ 선언된 변수를 담고
+            "param2": "안녕" // 선언하지 않은 변수에는 직접 어떤 값을 담음 // 방법이 두가지가 있음을 알려주는 것임
+      },
+      // 요청이 성공했을 때 실행되는 부분
+      success: function(res) {
+        console.log("성공", res);
+      },
+      // 요청이 실패했을 때 실행되는 부분
+      error: function() {
+        console.log("실패");
+      }
+    })
+  }
+
+</script>
+</html>
