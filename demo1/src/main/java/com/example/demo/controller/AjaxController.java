@@ -43,6 +43,14 @@ public class AjaxController {
 	        System.out.println("param1 = " + param1 + ", param2 = " + param2);
 	        return "ex04메서드 호출 완료";
 	    }
+	//04를 params라는 매개변수로 한번에 받는 방법 
+//	 @PostMapping("/ex04")
+//	 public @ResponseBody String ex04(@RequestBody Map<String, String> params) {
+//	     String param1 = params.get("param1");
+//	     String param2 = params.get("param2");
+//	     System.out.println("param1 = " + param1 + ", param2 = " + param2);
+//	     return "ex04메서드 호출 완료";
+//	 }
 	 
 	 @GetMapping("/ex05") // @ResponseBody로 별도로 파라미터를 받을 때는 RequestParam을 이용했었는데 게시판이나 회원가입을 생각하면 작성자, 내용 들을 따로 받아서 그걸 dto에다가 담는 과정이 필요한 건데 이제 model Attribute라는 어노테이션을 제공함으로써 dto로 곧바로 받을 수가 있었다. 그것을 위한 전제조건은 info태그에 입력 받은 데이터를 name 속성과 dto의 이름이 모두 정확하게 일치해야만 스프링이 이름에 맞춰서 값을 담아서 dto 객체로 만들어줬음 => 파라미터 이름만 맞으면 스프링이 많은 역할을 해준다. 여기서도 modelAttribute를 활용할 수 있음
 	    public @ResponseBody AjaxDTO ex05(@ModelAttribute AjaxDTO ajaxDTO) { //필드 값이 모두 세팅이 된 AjaxDTO로 받아줄 수 있음 //사실 ModelAttribute는 생략 가능함 but 익숙치 않은 상황에서는 인지를 위해 그냥 붙이는 걸 추천함

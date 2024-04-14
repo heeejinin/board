@@ -36,9 +36,8 @@ public class BoardController {
 	//글 작성하고 홈으로 돌아가기
 	@PostMapping("write")
 	public String write(@ModelAttribute BoardDTO boardDTO) {//폼에 있는 데이터를 write 매개변수(BoardDTO)에 담음
-//		System.out.println("boardDTO = " + boardDTO.getContents()+", "+boardDTO.getTitle()+","+boardDTO.getId());
 		boardService.write(boardDTO); 
-		return "home"; //home.html로 감
+		return "home"; //home.html로 감 
 	}
 	
 	//글 목록

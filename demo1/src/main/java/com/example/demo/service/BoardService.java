@@ -48,7 +48,7 @@ public class BoardService {
 	}
 
 	public BoardDTO findById(Long id) {
-		Optional<BoardEntity> optionalBoardEntity = boardRepository.findById(id);
+		Optional<BoardEntity> optionalBoardEntity = boardRepository.findById(id); //.findById(id)로 id와 일치하는 게시글 데이터 전체를 가져오게 됨
 		//Optional은 값의 존재 여부를 나타내는 컨테이너 객체
 		//만약 해당 ID에 해당하는 게시글이 없으면 빈 Optional 객체가 반환
 		if(optionalBoardEntity.isPresent()) { //optionalBoardEntity 옵셔널 객체가 있으면 boardDTO로 반환하고, 

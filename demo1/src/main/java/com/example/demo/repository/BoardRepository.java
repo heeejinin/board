@@ -9,7 +9,7 @@ import com.example.demo.entity.BoardEntity;
 
 public interface BoardRepository extends JpaRepository<BoardEntity, Long>{
 	
-	//조회수 증가 라는건 DB를 기준으로네이티브 쿼리를 고민한다면 
+	//조회수 증가 라는건 DB를 기준으로 네이티브 쿼리를 고민한다면 
 	//update board set hits=hits+1 where id=? (DB기준 네이티브 쿼리)
 	//별도의 쿼리가 필요한 상황 
 	@Modifying //업데이트나 삭제 기능의 쿼리를 실행해야 할 때 필수로 사용해야 하는 어노테이션

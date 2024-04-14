@@ -5,12 +5,28 @@
 <title>Home</title>
 </head>
 <body>
-<button onclick="saveReq()">글작성</button> <!-- onclick은 함수를 불러냄 -->
+<button onclick="joinReq()">회원가입</button> <!-- onclick은 함수를 불러냄 -->
+<button onclick="loginReq()">로그인</button>
+<button onclick="memberReq()">회원목록</button> 
+<button onclick="saveReq()">글작성</button> 
 <button onclick="listReq()">글목록</button>
 <button onclick="indexReq()">ajax</button>
 </body>
 
 <script>
+	//링크로 가는 것은 HTTP에서 Get메서드를 가용한 요청임
+	const joinReq = () =>{
+		location.href = "/member/join";
+	}
+	
+	const loginReq = () =>{
+		location.href = "/member/login";
+	}
+	
+	const memberReq = () =>{
+		location.href = "/meber/list";
+	}
+	
 	const saveReq = () =>{
 		location.href = "/board/write";
 	}
